@@ -6,7 +6,7 @@ class Player {
         this.gravity = 1
 
         this.position = {
-            x: 0,
+            x: 300,
             y: 0
         }
 

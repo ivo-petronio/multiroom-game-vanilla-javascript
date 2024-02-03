@@ -13,7 +13,7 @@ body {
 }
 
 #canvas {
-    width: 500px;
-    height: 500px;
+    width: 1024px;
+    height: 576px;
     border: solid 1px orangered;
 }
