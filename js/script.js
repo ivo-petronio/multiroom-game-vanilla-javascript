@@ -10,7 +10,8 @@ const parsedCollisions = collisionLevel1.parse2D();
 const collisionBlocks = parsedCollisions.createObjectsFrom2D();
 
 const player = new Player({
-    collisionBlocks
+    collisionBlocks,
+    imageSrc: './assets/sprites/img/king/idle.png'
 })
 
 const background = new Sprite({
