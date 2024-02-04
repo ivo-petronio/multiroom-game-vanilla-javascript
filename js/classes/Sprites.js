@@ -1,14 +1,15 @@
 class Sprite {
-    constructor({position, imageSrc}) {
+    constructor({position, imageSrc, frameRate = 1}) {
         this.position = position
         this.image = new Image()
         this.image.src = imageSrc
         this.loaded = false // determine the image was not loaded at this point.
         this.image.onload = () => { // check if the image was alread loaded and setup "true" to the variable loaded.
             this.loaded = true;
-            this.width = this.image.width / 11;
+            this.width = this.image.width / this.frameRate;
             this.height = this.image.height;
         }
+        this.frameRate = frameRate;
     }
 
     draw() {

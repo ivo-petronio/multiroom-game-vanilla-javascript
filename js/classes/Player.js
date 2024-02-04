@@ -1,6 +1,6 @@
 class Player extends Sprite{
-    constructor({collisionBlocks = [], imageSrc}) {
-        super({imageSrc})
+    constructor({collisionBlocks = [], imageSrc, frameRate}) {
+        super({imageSrc, frameRate})
 
         this.gravity = 1
 
