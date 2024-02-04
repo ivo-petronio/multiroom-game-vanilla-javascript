@@ -4,7 +4,15 @@ const ctx = canvas.getContext('2d');
 const CANVAS_WIDTH = canvas.width = 1024;
 const CANVAS_HEIGHT = canvas.height = 576;
 
-const player = new Player();
+
+const parsedCollisions = collisionLevel1.parse2D();
+//LEVEL 1 SCENARY COLLISIONS
+const collisionBlocks = parsedCollisions.createObjectsFrom2D();
+
+const player = new Player({
+    collisionBlocks
+})
+
 const background = new Sprite({
 
     position: {
@@ -27,11 +35,6 @@ const keys = {
         pressed: false
     }
 }
-
-const parsedCollisions = collisionLevel1.parse2D();
-
-//LEVEL 1 SCENARY COLLISIONS
-const collisionBlocks = parsedCollisions.createObjectsFrom2D();
 
 
 function animate() {
