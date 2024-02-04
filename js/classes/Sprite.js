@@ -1,16 +1,12 @@
 class Sprite {
-    constructor({position, imageSrc, frameRate = 1}) {
+    constructor({position, imageSrc}) {
         this.position = position
         this.image = new Image()
         this.image.src = imageSrc
         this.loaded = false // determine the image was not loaded at this point.
         this.image.onload = () => { // check if the image was alread loaded and setup "true" to the variable loaded.
             this.loaded = true;
-            this.width = this.image.width / this.frameRate;
-            this.height = this.image.height;
         }
-        this.frameRate = frameRate;
-        this.currentFrame = 0;
     }
 
     draw() {
@@ -23,23 +19,8 @@ class Sprite {
             width: this.width,
             height: this.height
         };
-        ctx.drawImage(this.image,
-                      cropbox.position.x,
-                      cropbox.position.y,
-                      cropbox.width,
-                      cropbox.height,
-                      this.position.x,
-                      this.position.y,
-                      this.width,
-                      this.height
-        );
-        this.updateFrames();
+        ctx.drawImage(this.image, this.position.x, this.position.y)
 
-    }
-
-    updateFrames() {
-        this.currentFrame++;
-        if (this.currentFrame < this.frameRate -1) this.currentFrame = 0;
     }
 
 }
