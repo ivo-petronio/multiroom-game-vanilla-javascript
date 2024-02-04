@@ -10,18 +10,19 @@ class Sprite {
             this.height = this.image.height;
         }
         this.frameRate = frameRate;
+        this.currentFrame = 0;
     }
 
     draw() {
         if (!this.loaded) return;
         const cropbox = {
             position: {
-                x: 0,
+                x: this.width * this.currentFrame,
                 y: 0
             },
             width: this.width,
             height: this.height
-        }
+        };
         ctx.drawImage (
             this.image,
             cropbox.position.x,
@@ -32,7 +33,14 @@ class Sprite {
             this.position.y,
             this.width,
             this.height
-        )
+        );
+        this.updateFramesOfSpriteImage();
+    }
+
+    updateFramesOfSpriteImage() {
+        this.currentFrame++;
+        if (this.currentFrame < this.frameRate - 1) this.currentFrame++;
+        else this.currentFrame = 0;
     }
 
 }
