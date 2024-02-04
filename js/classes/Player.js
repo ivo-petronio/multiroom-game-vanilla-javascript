@@ -1,8 +1,7 @@
-class Player {
-    constructor({collisionBlocks = []}) {
+class Player extends Sprite {
+    constructor({collisionBlocks = [], imageSrc}) {
+        super({imageSrc})
 
-        this.width = 25
-        this.height = 25
         this.gravity = 1
 
         this.position = {
@@ -22,12 +21,9 @@ class Player {
         this.collisionBlocks = collisionBlocks;
     }
 
-    draw() {
-        ctx.fillStyle = "blue";
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-    }
-
     update() {
+        ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
+        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
         this.position.x += this.velocity.x;
         this.checkForHorizontalCollisions();
         this.applyGravity();
