@@ -21,9 +21,11 @@ window.addEventListener("keyup", e => {
             break;
         case 'd':
             keys.d.pressed = false;
+            //player.switchSprite("idleRight");
             break;
         case 'a':
             keys.a.pressed = false;
+            //player.switchSprite("idleLeft");
             break;
     }
 });

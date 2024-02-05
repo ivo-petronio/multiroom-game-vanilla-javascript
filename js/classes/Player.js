@@ -1,6 +1,6 @@
 class Player extends Sprite{
-    constructor({collisionBlocks = [], imageSrc, frameRate}) {
-        super({imageSrc, frameRate})
+    constructor({collisionBlocks = [], imageSrc, frameRate, animations}) {
+        super({imageSrc, frameRate, animations})
 
         this.gravity = 1
 
@@ -15,7 +15,7 @@ class Player extends Sprite{
 
         this.velocity = {
             x: 0,
-            y: 0,
+            y: 0
         }
 
         this.collisionBlocks = collisionBlocks;
@@ -54,6 +54,14 @@ class Player extends Sprite{
             width: 50,
             height: 53
         }
+    }
+
+    switchSprite(name) {
+        if (this.image === this.animations[name].image) return;
+        this.currentFrame = 0;
+        this.image = this.animations[name].image;
+        this.frameRate = this.animations[name].frameRate;
+        this.frameBuffer = this.animations[name].frameBuffer;
     }
 
     checkForHorizontalCollisions() {
