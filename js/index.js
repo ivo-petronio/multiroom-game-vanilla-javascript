@@ -50,6 +50,16 @@ const background = new Sprite({
     imageSrc : "./assets/sprites/img/backgroundLevel1.png"
 });
 
+const doors = [
+    new Sprite({
+        position: {
+            x: 0,
+            y: 0
+        },
+        imageSrc: "./assets/sprites/img/doorOpen.png"
+    })
+]
+
 
 
 const keys = {
@@ -85,6 +95,9 @@ function animate() {
     background.draw();
     collisionBlocks.forEach(collisionBlock => {
         collisionBlock.draw();
+    })
+    doors.forEach(door => {
+        door.draw();
     })
     player.draw();
     player.update();
