@@ -12,7 +12,8 @@ const collisionBlocks = parsedCollisions.createObjectsFrom2D();
 const player = new Player({
     collisionBlocks,
     imageSrc: './assets/sprites/img/king/idle.png',
-    frameRate: 11
+    frameRate: 11,
+    
 })
 
 const background = new Sprite({
