@@ -29,14 +29,16 @@ class Player extends Sprite{
         this.position.x += this.velocity.x;
         this.updateHitboxPosition();
         this.checkForHorizontalCollisions();
-
+        
+        //This is the hitbox
+        /*
         ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
         ctx.fillRect(
             this.hitbox.position.x,
             this.hitbox.position.y,
             this.hitbox.width,
             this.hitbox.height
-        );
+        );*/
 
         this.applyGravity();
         this.updateHitboxPosition();
