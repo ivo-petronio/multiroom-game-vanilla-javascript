@@ -37,6 +37,12 @@ const player = new Player({
             frameBuffer: 4,
             loop: true,
             imageSrc: './assets/sprites/img/king/runLeft.png',
+        },
+        enterDoor: {
+            frameRate: 8,
+            frameBuffer: 4,
+            loop: false,
+            imageSrc: './assets/sprites/img/king/enterDoor.png'
         }
     }
 })
@@ -56,7 +62,6 @@ const doors = [
             x: 767,
             y: 272
         },
-        //width: 92,
         imageSrc: "./assets/sprites/img/doorOpen.png",
         frameRate: 5,
         frameBuffer: 10,
@@ -82,6 +87,7 @@ const keys = {
 
 function animate() {
 
+    if (player.preventInput) return;
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     player.velocity.x = 0;
     if(keys.d.pressed) {

@@ -19,6 +19,8 @@ class Player extends Sprite{
         }
 
         this.collisionBlocks = collisionBlocks;
+
+        this.preventInput = false;
     }
 
     update() {
@@ -120,6 +122,24 @@ class Player extends Sprite{
                     }
 
             }
+        }
+    }
+
+    handleInput(keys) {
+        if (this.preventInput) return;
+/*         ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);*/
+        this.velocity.x = 0;
+        if(keys.d.pressed) {
+            this.lastDirection = 'right';
+            this.switchSprite('runRight');
+            this.velocity.x = 5;;
+        } else if(keys.a.pressed) {
+            this.lastDirection = 'left';
+            this.switchSprite('runLeft');
+            this.velocity.x = -5;
+        } else {
+            if(this.lastDirection === 'left') this.switchSprite("idleLeft");
+            else if(this.lastDirection === 'right') this.switchSprite("idleRight");
         }
     }
 }
