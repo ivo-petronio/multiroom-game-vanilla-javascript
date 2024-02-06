@@ -17,7 +17,6 @@ window.addEventListener('keydown', e => {
                     player.preventInput = true;
                     player.switchSprite("enterDoor");
                     door.play();
-                    console.log(player.image);
                     return;
                 }
             }

@@ -42,7 +42,13 @@ const player = new Player({
             frameRate: 8,
             frameBuffer: 12,
             loop: false,
-            imageSrc: './assets/sprites/img/king/enterDoor.png'
+            imageSrc: './assets/sprites/img/king/enterDoor.png',
+            onComplete: () => {
+                console.log("Está um puta escuro aqui dentro!");
+                gsap.to(overlay, {
+                    opacity: 1
+                })
+            }
         }
     }
 })
@@ -84,9 +90,12 @@ const keys = {
     }
 }
 
+const overlay = {
+    opacity: 0
+}
 
 function animate() {
-
+    requestAnimationFrame(animate);
     background.draw();
     collisionBlocks.forEach(collisionBlock => {
         collisionBlock.draw();
@@ -98,7 +107,12 @@ function animate() {
     player.handleInput(keys);
     player.draw();
     player.update();
-    requestAnimationFrame(animate);
+
+    ctx.save();
+    ctx.globalAlpha = overlay.opacity;
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ctx.restore();
 }
 
 animate();

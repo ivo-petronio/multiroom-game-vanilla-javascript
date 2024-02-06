@@ -6,7 +6,7 @@ class Sprite {
         animations, 
         frameBuffer = 2, 
         loop, 
-        autoplay = true
+        autoplay = true,
     }) {
         this.position = position
         this.image = new Image()
@@ -23,7 +23,8 @@ class Sprite {
         this.frameBuffer = frameBuffer;
         this.animations = animations;
         this.loop = loop;
-        this.autoplay = autoplay
+        this.autoplay = autoplay;
+        this.currentAnimation;
         
 
         if (this.animations) {
@@ -70,6 +71,13 @@ class Sprite {
             if (this.currentFrame < this.frameRate - 1) this.currentFrame++;
             else if(this.loop) this.currentFrame = 0;
         }
+        if (this.currentAnimation?.onComplete) {
+            if (this.currentFrame === this.frameRate - 1 && !this.currentAnimation.isActive) {
+                this.currentAnimation.onComplete();
+                this.currentAnimation = true;
+            }
+        }
     }
+
 
 }
