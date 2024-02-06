@@ -53,10 +53,15 @@ const background = new Sprite({
 const doors = [
     new Sprite({
         position: {
-            x: 0,
-            y: 0
+            x: 767,
+            y: 272
         },
-        imageSrc: "./assets/sprites/img/doorOpen.png"
+        //width: 92,
+        imageSrc: "./assets/sprites/img/doorOpen.png",
+        frameRate: 5,
+        frameBuffer: 10,
+        loop: false,
+        autoplay: false
     })
 ]
 
