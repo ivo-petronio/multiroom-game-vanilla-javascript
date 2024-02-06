@@ -5,7 +5,7 @@ class Sprite {
         frameRate = 1, 
         animations, 
         frameBuffer = 2, 
-        loop = true, 
+        loop, 
         autoplay = true
     }) {
         this.position = position
@@ -33,6 +33,10 @@ class Sprite {
                 this.animations[key].image = image;
             }
         }
+    }
+
+    play() {
+        this.autoplay = true;
     }
 
     draw() {

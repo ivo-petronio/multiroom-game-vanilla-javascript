@@ -40,7 +40,7 @@ const player = new Player({
         },
         enterDoor: {
             frameRate: 8,
-            frameBuffer: 4,
+            frameBuffer: 12,
             loop: false,
             imageSrc: './assets/sprites/img/king/enterDoor.png'
         }
@@ -87,22 +87,6 @@ const keys = {
 
 function animate() {
 
-    if (player.preventInput) return;
-    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    player.velocity.x = 0;
-    if(keys.d.pressed) {
-        player.lastDirection = 'right';
-        player.switchSprite('runRight');
-        player.velocity.x = 5;;
-    } else if(keys.a.pressed) {
-        player.lastDirection = 'left';
-        player.switchSprite('runLeft');
-        player.velocity.x = -5;
-    } else {
-        if(player.lastDirection === 'left') player.switchSprite("idleLeft");
-        else if(player.lastDirection === 'right') player.switchSprite("idleRight");
-    }
-
     background.draw();
     collisionBlocks.forEach(collisionBlock => {
         collisionBlock.draw();
@@ -110,6 +94,8 @@ function animate() {
     doors.forEach(door => {
         door.draw();
     })
+
+    player.handleInput(keys);
     player.draw();
     player.update();
     requestAnimationFrame(animate);

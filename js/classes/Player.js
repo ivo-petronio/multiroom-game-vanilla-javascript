@@ -1,6 +1,6 @@
 class Player extends Sprite{
-    constructor({collisionBlocks = [], imageSrc, frameRate, animations}) {
-        super({imageSrc, frameRate, animations})
+    constructor({collisionBlocks = [], imageSrc, frameRate, animations, loop}) {
+        super({imageSrc, frameRate, animations, loop})
 
         this.gravity = 1
 
@@ -19,8 +19,8 @@ class Player extends Sprite{
         }
 
         this.collisionBlocks = collisionBlocks;
-
         this.preventInput = false;
+
     }
 
     update() {
@@ -58,12 +58,30 @@ class Player extends Sprite{
         }
     }
 
+    handleInput(keys) {
+        if (this.preventInput) return;
+        this.velocity.x = 0;
+        if(keys.d.pressed) {
+            this.lastDirection = 'right';
+            this.switchSprite('runRight');
+            this.velocity.x = 5;;
+        } else if(keys.a.pressed) {
+            this.lastDirection = 'left';
+            this.switchSprite('runLeft');
+            this.velocity.x = -5;
+        } else {
+            if(this.lastDirection === 'left') this.switchSprite("idleLeft");
+            else if(this.lastDirection === 'right') this.switchSprite("idleRight");
+        }
+    }
+
     switchSprite(name) {
         if (this.image === this.animations[name].image) return;
         this.currentFrame = 0;
         this.image = this.animations[name].image;
         this.frameRate = this.animations[name].frameRate;
         this.frameBuffer = this.animations[name].frameBuffer;
+        this.loop = this.animations[name].loop;
     }
 
     checkForHorizontalCollisions() {
@@ -122,24 +140,6 @@ class Player extends Sprite{
                     }
 
             }
-        }
-    }
-
-    handleInput(keys) {
-        if (this.preventInput) return;
-/*         ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);*/
-        this.velocity.x = 0;
-        if(keys.d.pressed) {
-            this.lastDirection = 'right';
-            this.switchSprite('runRight');
-            this.velocity.x = 5;;
-        } else if(keys.a.pressed) {
-            this.lastDirection = 'left';
-            this.switchSprite('runLeft');
-            this.velocity.x = -5;
-        } else {
-            if(this.lastDirection === 'left') this.switchSprite("idleLeft");
-            else if(this.lastDirection === 'right') this.switchSprite("idleRight");
         }
     }
 }

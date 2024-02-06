@@ -1,5 +1,5 @@
 window.addEventListener('keydown', e => {
-    if (player.preventInput) return;
+    //if(player.preventInput) return;
     switch(e.key) {
         case 'w':
             for (let i = 0; i < doors.length; i++) {
@@ -14,9 +14,10 @@ window.addEventListener('keydown', e => {
             
                     player.velocity.x = 0;
                     player.velocity.y = 0;
-                    player.preventInput = false;
-                    //player.switchSprite("enterDoor");
-                    door.autoplay = true;
+                    player.preventInput = true;
+                    player.switchSprite("enterDoor");
+                    door.play();
+                    console.log(player.image);
                     return;
                 }
             }
