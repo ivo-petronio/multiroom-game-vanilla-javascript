@@ -5,9 +5,10 @@ const CANVAS_WIDTH = canvas.width = 1024;
 const CANVAS_HEIGHT = canvas.height = 576;
 
 
-const parsedCollisions = collisionLevel1.parse2D();
-//LEVEL 1 SCENARY COLLISIONS
-const collisionBlocks = parsedCollisions.createObjectsFrom2D();
+let parsedCollsions;
+let collisionBlocks;
+let background;
+let doors;
 
 const player = new Player({
     collisionBlocks,
@@ -53,28 +54,39 @@ const player = new Player({
     }
 })
 
-const background = new Sprite({
+let level = 1;
+let levels = {
+    1: {
+        init: () => {
+            parsedCollisions = collisionLevel1.parse2D();
+            collisionBlocks = parsedCollisions.createObjectsFrom2D();
+    
+            background = new Sprite({
+                position: {
+                    x: 0,
+                    y: 0
+                },
+                imageSrc : "./assets/sprites/img/backgroundLevel1.png"
+            }),
+    
+            doors = [
+                new Sprite({
+                    position: {
+                        x: 767,
+                        y: 272
+                    },
+                    imageSrc: "./assets/sprites/img/doorOpen.png",
+                    frameRate: 5,
+                    frameBuffer: 10,
+                    loop: false,
+                    autoplay: false
+                })
+            ]
+        }
+    }
+    }
 
-    position: {
-        x: 0,
-        y: 0
-    },
-    imageSrc : "./assets/sprites/img/backgroundLevel1.png"
-});
 
-const doors = [
-    new Sprite({
-        position: {
-            x: 767,
-            y: 272
-        },
-        imageSrc: "./assets/sprites/img/doorOpen.png",
-        frameRate: 5,
-        frameBuffer: 10,
-        loop: false,
-        autoplay: false
-    })
-]
 
 
 
@@ -115,4 +127,5 @@ function animate() {
     ctx.restore();
 }
 
+levels[level].init();
 animate();
