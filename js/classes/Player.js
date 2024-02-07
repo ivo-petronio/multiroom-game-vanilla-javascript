@@ -19,14 +19,13 @@ class Player extends Sprite{
         }
 
         this.collisionBlocks = collisionBlocks;
-        this.preventInput = false;
 
     }
 
     update() {
-        /* This is the blue box
-        ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
-        ctx.fillRect(this.position.x, this.position.y, this.width, this.height); */
+        //This is the blue box
+        /*ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
+        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);*/
 
         this.position.x += this.velocity.x;
         this.updateHitboxPosition();
@@ -47,31 +46,20 @@ class Player extends Sprite{
         this.checkForVerticalCollisions();       
     }
 
-    updateHitboxPosition() {
-        this.hitbox = {
-            position: {
-                x: this.position.x + 56,
-                y: this.position.y + 34
-            },
-            width: 50,
-            height: 53
-        }
-    }
-
     handleInput(keys) {
         if (this.preventInput) return;
         this.velocity.x = 0;
         if(keys.d.pressed) {
-            this.lastDirection = 'right';
             this.switchSprite('runRight');
-            this.velocity.x = 5;;
+            this.velocity.x = 5;
+            this.lastDirection = 'right';
         } else if(keys.a.pressed) {
-            this.lastDirection = 'left';
             this.switchSprite('runLeft');
             this.velocity.x = -5;
+            this.lastDirection = 'left';
         } else {
             if(this.lastDirection === 'left') this.switchSprite("idleLeft");
-            else if(this.lastDirection === 'right') this.switchSprite("idleRight");
+            else this.switchSprite("idleRight");
         }
     }
 
@@ -83,6 +71,17 @@ class Player extends Sprite{
         this.frameBuffer = this.animations[name].frameBuffer;
         this.loop = this.animations[name].loop;
         this.currentAnimation = this.animations[name];
+    }
+
+    updateHitboxPosition() {
+        this.hitbox = {
+            position: {
+                x: this.position.x + 56,
+                y: this.position.y + 34
+            },
+            width: 50,
+            height: 53
+        }
     }
 
     checkForHorizontalCollisions() {

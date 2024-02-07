@@ -3,9 +3,8 @@ THIS FUNCTION SLICES THE ORIGINAL ARRAY WITH THE SCENARY COLLISIONS AND CREATES 
 THAT CONTAINS OTHER ARRAY ON EACH POSITION
 */
 
-const rows = [];
-
 Array.prototype.parse2D = function() {
+    const rows = [];
     for (let i = 0; i < this.length; i += 16) {
         rows.push(this.slice(i, i+16));
     }
@@ -19,7 +18,7 @@ Array.prototype.createObjectsFrom2D = function() {
     const objects = [];
     this.forEach((row, y) => {
         row.forEach((symbol, x) => {
-            if(symbol === 292) {
+            if(symbol === 292 || symbol === 250) {
                 objects.push(new CollisionBlock({
                     position: {
                         x: x*64,

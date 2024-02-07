@@ -5,7 +5,7 @@ class Sprite {
         frameRate = 1, 
         animations, 
         frameBuffer = 2, 
-        loop, 
+        loop = true, 
         autoplay = true,
     }) {
         this.position = position
@@ -36,10 +36,6 @@ class Sprite {
         }
     }
 
-    play() {
-        this.autoplay = true;
-    }
-
     draw() {
         if (!this.loaded) return;
         const cropbox = {
@@ -50,6 +46,7 @@ class Sprite {
             width: this.width,
             height: this.height
         };
+
         ctx.drawImage (
             this.image,
             cropbox.position.x,
@@ -61,23 +58,31 @@ class Sprite {
             this.width,
             this.height
         );
+
         this.updateFramesOfSpriteImage();
+    }
+
+    play() {
+        this.autoplay = true;
     }
 
     updateFramesOfSpriteImage() {
         if (!this.autoplay) return;
+
         this.elapsedFrames++;
+
         if (this.elapsedFrames % this.frameBuffer === 0) {
             if (this.currentFrame < this.frameRate - 1) this.currentFrame++;
             else if(this.loop) this.currentFrame = 0;
         }
+
         if (this.currentAnimation?.onComplete) {
             if (this.currentFrame === this.frameRate - 1 && !this.currentAnimation.isActive) {
                 this.currentAnimation.onComplete();
-                this.currentAnimation = true;
+                this.currentAnimation.isActive = true;
             }
         }
-    }
+    }   
 
 
 }
